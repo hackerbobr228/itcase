@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-c-b588kgku04ln5cb_83(yxogv7_mht4ka0vo98ov#d(^-ewge'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['itcase.onrender.com']
 
@@ -119,10 +119,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+import os
+
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # (если нужно)
 STATICFILES_DIRS = [BASE_DIR / 'main/static']
+
 LOGIN_URL = '/login/'           # Должно быть!
 LOGOUT_REDIRECT_URL = '/login/' # После выхода перебрасывает сюда
 
