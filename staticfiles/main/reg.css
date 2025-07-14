@@ -282,7 +282,7 @@
   /* Изображение приложения */
   .app-card img {
       max-width: 100%;
-      border-radius: %;
+      border-radius: 20%;
       margin-bottom: 15px;
   }
   
