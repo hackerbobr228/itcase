@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Вход | ITCASE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'main/reg.css' %}">
+</head>
+<body style="background: #f0f2f5;">
+
+<div class="register-layout">
+
+  <!-- Левая часть -->
+  <div class="register-left">
+    <h1 class="big-logo">ITCASE</h1>
+    <p class="slogan">itcase помогает вам найти работу и начать свой бизнес</p>
+  </div>
+
+  <!-- Правая часть -->
+  <div class="register-right">
+    <div class="form-card">
+      <h2>Вход в аккаунт</h2>
+      <p class="sub">Добро пожаловать!</p>
+
+      {% if error %}
+        <p style="color: red;">{{ error }}</p>
+      {% endif %}
+      {% if payment_required %}
+        <a href="/payment-required/" style="display:inline-block;padding:10px 20px;background:#00AEEF;color:#fff;text-decoration:none;border-radius:5px;font-size:18px;margin-top:10px;margin-bottom:10px;">
+          Оплатить через PayMe
+        </a>
+      {% endif %}
+
+      <form method="POST">
+        {% csrf_token %}
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Пароль" required>
+        <button type="submit" class="login-btn">Войти</button>
+      </form>
+
+      <div class="small-link2">
+        Нет аккаунта? <a href="{% url 'register' %}" class="login-btn2">Зарегистрироваться</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

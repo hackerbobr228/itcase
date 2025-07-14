@@ -1,0 +1,723 @@
+/* === Base Reset === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* === Utility Classes === */
+.hidden {
+  display: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* === Main Layout === */
+.dashboard-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e293b, #1e40af, #1e293b);
+}
+
+.layout {
+  display: flex;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* === Mobile Header === */
+.mobile-header {
+  display: none;
+  background-color: #1d3557;
+  color: white;
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 50;
+}
+
+.mobile-header h1 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.mobile-menu-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.mobile-menu-btn:hover {
+  background-color: #457b9d;
+}
+
+.mobile-menu-btn svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* === Sidebar === */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16rem;
+  height: 100vh;
+  background-color: #1d3557;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 50;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+  display: none;
+}
+
+.sidebar-overlay.show {
+  display: block;
+}
+
+/* === Sidebar Logo === */
+.sidebar-logo {
+  padding: 1.5rem;
+  border-bottom: 1px solid #457b9d;
+  display: block;
+}
+
+.sidebar-logo h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+/* === Account Box === */
+.account-section {
+  padding: 1rem;
+  border-bottom: 1px solid #457b9d;
+}
+
+.account-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background-color: #264653;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+.account-box:hover {
+  background-color: #2a9d8f;
+}
+
+.avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #a8dadc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatar svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #1d3557;
+}
+
+.account-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.account-info .username {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.account-info .email {
+  font-size: 0.875rem;
+  color: #d1d5db;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* === Account Dropdown === */
+.account-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 0.5rem;
+  background: white;
+  color: #1d3557;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.account-dropdown.show {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.account-dropdown-item {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.account-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.account-dropdown-item.user-info {
+  background-color: #f9fafb;
+}
+
+.account-dropdown-item.user-info .username {
+  font-weight: 600;
+  color: #1d3557;
+}
+
+.account-dropdown-item.user-info .email {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: #ef4444;
+  color: white;
+  border: none;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #dc2626;
+}
+
+.logout-btn svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* === Navigation === */
+.sidebar-nav {
+  flex: 1;
+  padding: 1rem;
+  height: 100%;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.nav-item a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: white;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.nav-item a:hover {
+  background-color: #457b9d;
+}
+
+.nav-item svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* === Main Content === */
+.main-content {
+  flex: 1;
+  min-height: 100vh;
+  transition: margin-left 0.3s ease;
+}
+
+.content-wrapper {
+  padding: 1rem;
+  max-width: 112rem;
+  margin: 0 auto;
+}
+
+/* === Welcome Section === */
+.welcome-section {
+  background-color: #1d3557;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.welcome-section h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.welcome-section p {
+  font-size: 1.125rem;
+  color: #d1d5db;
+}
+
+/* === Apps Section === */
+.apps-section h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+/* === Apps Grid === */
+.apps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.app-card {
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.app-card:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.app-image {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.app-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.app-card:hover .app-image img {
+  transform: scale(1.05);
+}
+
+.app-content {
+  padding: 1rem;
+}
+
+.app-title {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #1d3557;
+  margin-bottom: 0.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.app-description {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.app-meta {
+  margin-bottom: 1rem;
+}
+
+.app-meta-item {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-bottom: 0.25rem;
+}
+
+.download-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #1d3557;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: #457b9d;
+}
+
+.download-btn svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* === Empty State === */
+.empty-state {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.empty-state p {
+  color: #9ca3af;
+  font-size: 1.125rem;
+}
+
+/* === Animations === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease;
+}
+
+/* === Media Queries === */
+
+/* Mobile Styles */
+@media screen and (max-width: 767px) {
+  .mobile-header {
+    display: flex;
+  }
+  
+  .sidebar {
+    top: 4rem;
+    height: calc(100vh - 4rem);
+  }
+  
+  .sidebar-logo {
+    display: none;
+  }
+  
+  .content-wrapper {
+    padding: 1rem;
+  }
+  
+  .welcome-section {
+    padding: 1rem;
+  }
+  
+  .welcome-section h1 {
+    font-size: 1.25rem;
+  }
+  
+  .welcome-section p {
+    font-size: 1rem;
+  }
+  
+  .apps-section h2 {
+    font-size: 1.25rem;
+  }
+  
+  .app-content {
+    padding: 0.75rem;
+  }
+  
+  .app-title {
+    font-size: 1rem;
+  }
+}
+
+/* Small Tablets */
+@media screen and (min-width: 640px) {
+  .apps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .content-wrapper {
+    padding: 1.5rem;
+  }
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 768px) {
+  .mobile-header {
+    display: none;
+  }
+  
+  .sidebar {
+    position: static;
+    transform: translateX(0);
+    height: 100vh;
+  }
+  
+  .sidebar-overlay {
+    display: none !important;
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .content-wrapper {
+    padding: 2rem;
+  }
+  
+  .welcome-section {
+    padding: 2rem;
+  }
+  
+  .welcome-section h1 {
+    font-size: 1.875rem;
+  }
+  
+  .app-content {
+    padding: 1.5rem;
+  }
+  
+  .app-title {
+    font-size: 1.25rem;
+  }
+  
+  .app-description {
+    font-size: 1rem;
+  }
+  
+  .app-meta-item {
+    font-size: 0.875rem;
+  }
+}
+
+/* Large Tablets */
+@media screen and (min-width: 1024px) {
+  .apps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .content-wrapper {
+    padding: 3rem;
+  }
+  
+  .welcome-section h1 {
+    font-size: 2.25rem;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1280px) {
+  .apps-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large Desktop */
+@media screen and (min-width: 1536px) {
+  .apps-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* === Focus Styles for Accessibility === */
+.mobile-menu-btn:focus,
+.account-box:focus,
+.nav-item a:focus,
+.download-btn:focus,
+.logout-btn:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* === Print Styles === */
+@media print {
+  .sidebar,
+  .mobile-header {
+    display: none;
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .app-card {
+    break-inside: avoid;
+  }
+}
+
+/* === High Contrast Mode === */
+@media (prefers-contrast: high) {
+  .app-card {
+    border: 2px solid #000;
+  }
+  
+  .download-btn {
+    border: 2px solid #fff;
+  }
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* === App Card === */
+.app-card {
+  background: linear-gradient(135deg, #457b9d, #1d3557); /* Градиент для фона карточки */
+  color: white;
+  padding: 25px;
+  border-radius: 15px; /* Радиус для скругления углов */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Тень для карточки */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  height: 100%;
+  max-width: 100%;
+  text-align: left;
+}
+
+.app-card:hover {
+  transform: translateY(-10px); /* Эффект поднятия при наведении */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Более выраженная тень */
+}
+
+/* Заголовок карточки */
+.app-card h3 {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+/* Описание карточки */
+.app-card p {
+  font-size: 16px;
+  color: #f1f1f1;
+  margin-bottom: 15px;
+}
+
+/* Сеточные элементы (мета-информация) */
+.app-meta {
+  display: block;
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.app-meta-item {
+  margin: 5px 0;
+}
+
+/* Картинка приложения */
+.app-card img {
+  max-width: 100%;
+  border-radius: 10%;
+  margin-bottom: 15px;
+}
+
+/* Кнопка для скачивания */
+.app-card .btn {
+  padding: 12px 20px;
+  background-color: #1d3557;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.app-card .btn:hover {
+  background-color: #457b9d;
+}
+
+/* Кнопка "Подробнее" */
+.app-card .more-info {
+  text-decoration: none;
+  color: #f1f1f1;
+  font-size: 14px;
+  transition: color 0.3s ease;
+  margin-top: auto;
+}
+
+.app-card .more-info:hover {
+  color: #ffce00;
+}
