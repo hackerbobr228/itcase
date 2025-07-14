@@ -2,17 +2,21 @@ let sidebarOpen = false;
 let accountMenuOpen = false;
 let isMobile = false;
 
-// Initialize the app
 document.addEventListener("DOMContentLoaded", () => {
-  // Check screen size
-  checkScreenSize();
+  function initLucide() {
+    if (window.lucide && typeof window.lucide.replace === "function") {
+      window.lucide.replace();
+    } else {
+      setTimeout(initLucide, 50);
+    }
+  }
+  initLucide();
 
-  // Add event listeners
   window.addEventListener("resize", checkScreenSize);
   document.addEventListener("click", handleOutsideClick);
+  checkScreenSize();
 });
 
-// Screen size detection
 function checkScreenSize() {
   isMobile = window.innerWidth < 768;
   if (!isMobile) {
@@ -20,7 +24,6 @@ function checkScreenSize() {
   }
 }
 
-// Sidebar functions
 function toggleSidebar() {
   sidebarOpen = !sidebarOpen;
   updateSidebarState();
@@ -48,9 +51,12 @@ function updateSidebarState() {
     menuIcon.classList.remove("hidden");
     closeIcon.classList.add("hidden");
   }
+
+  if (window.lucide && typeof window.lucide.replace === "function") {
+    window.lucide.replace();
+  }
 }
 
-// Account menu functions
 function toggleAccountMenu() {
   accountMenuOpen = !accountMenuOpen;
   updateAccountMenuState();
@@ -71,18 +77,16 @@ function updateAccountMenuState() {
   }
 }
 
-// Handle clicks outside of menus
 function handleOutsideClick(event) {
   const accountBox = document.querySelector(".account-box");
   const accountDropdown = document.getElementById("accountDropdown");
+  const sidebar = document.getElementById("sidebar");
 
-  // Close account menu if clicking outside
   if (accountMenuOpen && !accountBox.contains(event.target)) {
     closeAccountMenu();
   }
 
-  // Close sidebar if clicking outside
-  if (sidebarOpen && !sidebar.contains(event.target)) {
+  if (sidebarOpen && !sidebar.contains(event.target) && !event.target.closest(".mobile-menu-btn")) {
     closeSidebar();
   }
 }

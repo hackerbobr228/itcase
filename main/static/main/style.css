@@ -60,23 +60,39 @@ body {
 }
 
 .mobile-menu-btn {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.2);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20%;
   border: none;
-  color: white;
-  padding: 0.5rem;
-  border-radius: 0.375rem;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  font-size: 24px;
+  color: white;
 }
 
 .mobile-menu-btn:hover {
   background-color: #457b9d;
 }
 
-.mobile-menu-btn svg {
-  width: 1.5rem;
-  height: 1.5rem;
+.menu-icon {
+  display: inline;
 }
+
+.close-icon {
+  display: none;
+}
+
+.close-icon.visible {
+  display: inline;
+}
+
+.menu-icon.hidden {
+  display: none;
+}
+
 
 /* === Sidebar === */
 .sidebar {
@@ -114,7 +130,7 @@ body {
 .sidebar-logo {
   padding: 1.5rem;
   border-bottom: 1px solid #457b9d;
-  display: block;
+  display: flex;
 }
 
 .sidebar-logo h1 {
@@ -586,7 +602,11 @@ body {
     grid-template-columns: repeat(4, 1fr);
   }
 }
-
+.logo {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
 /* === Focus Styles for Accessibility === */
 .mobile-menu-btn:focus,
 .account-box:focus,

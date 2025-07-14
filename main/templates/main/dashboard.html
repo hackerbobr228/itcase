@@ -4,19 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITCASE - Dashboard</title>
+    <title>itcase - Dashboard</title>
     <link rel="stylesheet" href="{% static 'main/style.css' %}">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+
+
 </head>
 <body>
     <div class="dashboard-container">
         <!-- Mobile Header -->
         <div class="mobile-header">
-            <h1>ITCASE</h1>
+            <h1>itcase</h1>
             <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Toggle menu">
-                <i data-lucide="menu" class="menu-icon"></i>
-                <i data-lucide="x" class="close-icon hidden"></i>
-            </button>
+                <span class="menu-icon">&#9776;</span> <!-- ☰ гамбургер -->
+                <span class="close-icon hidden">&times;</span> <!-- × крестик -->
+              </button>
         </div>
 
         <div class="layout">
@@ -26,7 +28,7 @@
             <!-- Sidebar -->
             <aside class="sidebar" id="sidebar">
                 <div class="sidebar-logo">
-                    <h1>ITCASE</h1>
+                    <h1>itcase</h1>
                 </div>
 
                 <!-- Account Section -->
@@ -81,7 +83,7 @@
                 <div class="content-wrapper">
                     <!-- Welcome Section -->
                     <section class="welcome-section fade-in">
-                        <h1>Добро пожаловать в ITCASE!</h1>
+                        <h1>Добро пожаловать в itcase!</h1>
                         <p>Мы помогаем вам найти работу и начать бизнес</p>
                     </section>
 
