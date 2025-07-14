@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .models import AppItem
+import os
 
 
 def register(request):
@@ -123,7 +124,32 @@ from django.http import HttpResponseForbidden
 def dashboard(request):
     if not request.user.is_active:
         return redirect('payment_required')
-    
+
     apps = AppItem.objects.all()
+
+    for app in apps:
+        # Проверка apk_file
+        apk_path = getattr(app.apk_file, 'path', None)
+        if apk_path and os.path.exists(apk_path):
+            app.apk_file_exists = True
+            try:
+                app.apk_file_size = os.path.getsize(apk_path)
+            except Exception:
+                app.apk_file_size = None
+        else:
+            app.apk_file_exists = False
+            app.apk_file_size = None
+
+        # Проверка изображения
+        img_path = getattr(app.image, 'path', None)
+        if img_path and os.path.exists(img_path):
+            app.image_exists = True
+            try:
+                app.image_url = app.image.url
+            except Exception:
+                app.image_url = None
+        else:
+            app.image_exists = False
+            app.image_url = None
 
     return render(request, 'main/dashboard.html', {'apps': apps, 'user': request.user})

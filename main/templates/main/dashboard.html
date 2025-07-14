@@ -93,7 +93,11 @@
                                 <div class="app-card">
     <!-- Приложение изображение -->
     <div class="app-image">
-        <img src="{{ app.image.url }}" alt="{{ app.title }}" class="app-thumbnail" loading="lazy">
+        {% if app.image_exists and app.image_url %}
+        <img src="{{ app.image_url }}" alt="{{ app.title }}" class="app-thumbnail" loading="lazy">
+    {% else %}
+        <div class="no-image">Нет изображения</div>
+    {% endif %}
     </div>
     <!-- Контент карточки приложения -->
     <div class="app-content">
@@ -101,9 +105,21 @@
         <p>{{ app.description }}</p>
         <div class="app-meta">
             <div class="app-meta-item">
-                Версия: {{ app.version }} | Обновлено: {{ app.updated_at|date:"d.m.Y" }}
+                {% if app.apk_file_exists %}
+    Размер: {{ app.apk_file_size|filesizeformat }}
+{% else %}
+    Файл не загружен
+{% endif %}
             </div>
-            <div class="app-meta-item">Размер: {{ app.apk_file.size|filesizeformat }}</div>
+            
+            <div class="app-meta-item">
+                {% if app.apk_file_exists %}
+                    Размер: {{ app.apk_file_size|filesizeformat }}
+                {% else %}
+                    Файл не загружен
+                {% endif %}
+            </div>
+            
         </div>
         <a href="{{ app.apk_file.url }}" class="btn" target="_blank">Скачать</a>
     </div>
