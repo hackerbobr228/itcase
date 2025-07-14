@@ -150,3 +150,6 @@ PAYME_MERCHANT_ID = 'YOUR_PAYME_MERCHANT_ID'
 PAYME_KEY = 'YOUR_PAYME_KEY'
 PAYME_TEST = True  # Set to False in production
 
+
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
